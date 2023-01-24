@@ -27,3 +27,8 @@ Every component is configurable using ENV variables, so when developing localy, 
 This app is VERY unfinished. It should atleast have paging mechanism for browsing stored records, as it currently only shows the last 10 testing days. Anything older cannot be viewed using this application.
 
 This app could be the perfect way to display various data visualizations from testing. Simply parse the uploaded records using a HTML parser and pull out relevant data. Corporate customers like colorful graphs :)
+
+## Landing page:
+
+![image](https://user-images.githubusercontent.com/32178114/214272050-9dfe4ddd-8612-4789-a3a9-9bd4dfa5eccd.png)
+
