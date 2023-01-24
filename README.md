@@ -9,7 +9,7 @@ fs-testing-dashboard-infrastructure => infrastructure files. Docker compose cont
 Basic premise of this app is to simplify automatic testing process in forumSTAR project. The whole process works something like this:
 
  1. QFTEST runs a bunch of tests on a windows server machine
- 2. After it finishes testing forumSTAR app, it calls a custom script that uploads resulting test reports to a machine (using WinSCP CLI interface) that has fs-testing-dashboard running
+ 2. After it finishes testing forumSTAR app, it calls a custom script that uploads resulting test reports and client downloader logs to a machine (using WinSCP CLI interface) that has fs-testing-dashboard running
  3. After uploading these files, the same script makes a HTTP call to fs-testing-dashboard API endpoint (backend) to indicate that it should index new reports.
  4. fs-testing-dashboard indexes these reports inside MongoDB. It uses HTML parsing as these testing reports are simply HTML files and extracts important info.
  5. These new test result reports are available via the web UI contained inside fs-testing-dashboard-client.
@@ -19,7 +19,7 @@ The backend and frontend both use Python Flask library for everything HTTP relat
 
 It uses NGINX for reverse proxy routing. Backend (API) is available under /api subroute, please check the app.conf to view NGINX settings.
 
-Everything is dockerized, inside this docker-compose is also mongo-express, which technically is not needed, it is only used for debugging so feel free to delete this service.
+Everything is dockerized, inside this docker-compose is also mongo-express, which technically is not needed, it is only used for debugging so feel free to delete this service. At the time of writing this documentation, the app is running on a single UBUNTU server using the docker-compose inside this repository. Please notice the volumes declared inside (mainly for backend). These volumes are mapped to machine directory where WinSCP uploads testing reports and client downloader logs. Using these volumes the app is able to access the reports and logs.
 
 Every component is configurable using ENV variables, so when developing localy, create a ".env" file (yes, only .env without filename) in the root directory of a component you are developing and the variables inside this file will be available during the runtime of the program.
 
